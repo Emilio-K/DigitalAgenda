@@ -1,0 +1,43 @@
+package comp3350.digitalagenda.application;
+
+import comp3350.tests.persistence.DataAccessStub;
+
+public class Main
+{
+	public static final String dbName="defdb";
+
+	private static String dbPathName = "database/defdb";
+	public static void main(String[] args)
+	{
+		startUp();
+		
+		shutDown();
+		System.out.println("All done");
+	}
+
+	//this is where you change which database you want to use.
+	public static void startUp()
+	{
+		Services.createDataAccess(dbName);
+		//Services.createDataAccess(dbName);
+	}
+	
+	public static String getDBPathName() 
+	{
+		if (dbPathName == null)
+			return dbName;
+		else
+			return dbPathName;
+	}
+	
+	public static void setDBPathName(String pathName) 
+	{
+		System.out.println("Setting DB path to: " + pathName);
+		dbPathName = pathName;
+	}
+
+	public static void shutDown()
+	{
+		Services.closeDataAccess();
+	}
+}
